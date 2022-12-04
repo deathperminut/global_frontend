@@ -6,15 +6,34 @@ import {TbUpload} from 'react-icons/tb';
 import {BsFillFileEarmarkCheckFill} from 'react-icons/bs';
 import Dropzone from 'react-dropzone';
 import Swal from 'sweetalert2';
+import ClipLoader from "react-spinners/ClipLoader";
 
-import { useCallback } from 'react';
+
+
+/* LOADING */
+
+
+function timeout(delay) {
+  return new Promise( res => setTimeout(res, delay) );
+}
+
+
+  
 
 export default function Landing() {
+
+  /*LOADING */
+  let [loadingInProgress, setLoading] = React.useState(false);
+
   /* USE STATE */
   let [file,setFile]=React.useState(null);
+  let [selectValue,setSelectValue]=React.useState("Nuevos clientes");
 
 
-  let [fileInput,setfileinput] = React.useState();
+  const ChangeSelectValue=(event)=>{
+    setSelectValue(event.target.value);
+  }
+
   const fileInputChange=(event)=>{
     if(event[0].type.includes("csv")){
       Swal.fire({
@@ -38,8 +57,18 @@ export default function Landing() {
   }
 
 
+  const Run=async()=>{
+    setLoading(true);
+    await timeout(2000); //for 1 sec delay
+    setLoading(false);
+  }
+
+
   return (
-    <div className='LandingContainer'>
+     <>
+     <ClipLoader className='Loading' color={'#183839'} loading={loadingInProgress} size={80} />
+    <div className={`LandingContainer ${loadingInProgress ? "active" : ""}`}>
+        
         <div className='FormContainer SecondContainer'>
             <form className='Form'>
                 <span className='Title '>Data Processing</span>
@@ -69,16 +98,16 @@ export default function Landing() {
                 </Dropzone>
                 <div className='InputSelectContainer'>
                     <label className='Text'>Seleccione el tipo de cliente</label>
-                    <Form.Select aria-label="Default select example" id="InputSelect" className='shadow'>
-                        <option value="1">Nuevos clientes</option>
-                        <option value="2">Antiguos clientes</option>
+                    <Form.Select onChange={(event)=>ChangeSelectValue(event)} aria-label="Default select example" id="InputSelect" className='shadow'>
+                        <option value="Nuevos clientes">Nuevos clientes</option>
+                        <option value="Antiguos clientes">Antiguos clientes</option>
                     </Form.Select>
                     
                     {file===null ? 
                     
                     <span className='Text alert'>Selecciona un archivo para analizar...</span>
                     :
-                    <button type="" className='ButtonSubmit shadow' disabled={file===null}>Analizar</button>}
+                    <button onClick={Run} type="button" className='ButtonSubmit shadow' disabled={file===null}>Analizar</button>}
                 </div>
                 
             </form>
@@ -87,5 +116,8 @@ export default function Landing() {
             <img className='Logo' src={Logo} alt="" />
         </div>
     </div>
+
+     </>
+    
   )
 } 
