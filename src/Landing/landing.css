@@ -1,0 +1,177 @@
+
+/*FONTS*/
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Patua+One&family=Silkscreen&display=swap');
+
+
+
+.LandingContainer{
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(90deg, rgba(165,181,190,1) 0%, rgba(255,255,255,1) 85%);
+    display: flex;
+    flex-direction: row;
+}
+
+.SecondContainer{
+    width: 50vw;
+    height: 100vh;
+}
+.center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.form-select{
+    border-radius: 20px !important;
+    background-color: aliceblue !important;
+}
+.rounded{
+    border-radius: 20px !important;
+}
+section{
+  margin-top: 20px;
+  box-shadow:
+  inset 0 -3em 3em rgba(0,0,0,0.1),
+        0.3em 0.3em 1em rgba(0, 0, 0, 0.096);
+  min-width: 450px !important ;
+  width: 40vw; 
+  min-height: 300px  !important; 
+  background-color: transparent;
+  border-radius: 1rem;
+  border:1px dashed rgb(40, 51, 119);
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+}
+.LogoDrag{
+    width: 40px;
+    height: 40px;
+    color: rgba(13,76,112,1);
+}
+.LogoContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.FormContainer{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Title{
+    font-family: 'Patua One', cursive;
+    font-size: 2.7rem;
+    text-transform: uppercase;
+	background: linear-gradient(to right,  rgba(13,76,112,1) 0%, rgb(52, 142, 165) 100%);
+    display: flex;
+    position: relative;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+.Form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+}
+
+.Text{
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-weight: 100;
+}
+.Text-Function{
+   color:rgb(40, 51, 119);
+}
+
+.Text-Function:hover{
+    color:rgb(62, 77, 179);
+ }
+.InputSelectContainer{
+    margin-top: 1rem;
+    color:rgb(40, 51, 119);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ButtonSubmit{
+    border-radius: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 10rem;
+    margin-top:20px ;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    background-color: rgb(157, 182, 184);
+}
+.ButtonSubmit:hover{
+     background-color: rgb(255, 255, 255); 
+}
+
+
+/*FORM SELECT*/
+.form-control {
+    background-color: aliceblue !important;
+}
+
+.form-control:focus {
+    width: 100% !important;
+    outline: 0;
+    transition: all 0.3s ease-in;
+}
+
+.alert{
+    font-size: small;
+    color: rgb(40, 51, 119)!important;
+}
+
+
+/*MEDIA QUERIES*/
+
+@media (max-width: 960px){
+    .LandingContainer{
+        display:flex;
+        flex-direction: column;
+        height: 120vh;
+    }
+    .FormContainer{
+        order: 2;
+        height: 100vh !important ;
+    }
+    .LogoContainer{
+        order: 1;
+        height: 30vh !important ;
+    }
+    .SecondContainer{
+        width: 100vw;
+    }
+    .Logo{
+        width: 250px;
+        height: 150px;
+    }
+    section{
+       min-width: 500px !important;
+       width: 500px !important;
+        
+    }
+
+}
+@media (max-width: 525px){
+    section{
+        min-width: 350px !important;
+        width: 350px !important;
+         
+     } 
+}
+
+    
+
+
+
+
