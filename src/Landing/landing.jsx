@@ -81,8 +81,7 @@ export default function Landing() {
     <div className={`LandingContainer ${loadingInProgress ? "active" : ""}`}>
         
         <div className='FormContainer SecondContainer'>
-            <form className='Form'>
-                <span className='Title '>Data Processing</span>
+            <form className='Form '>
                 <Dropzone onDrop={acceptedFiles => fileInputChange(acceptedFiles)}  className='shadow'>
                 {({getRootProps, getInputProps}) => (
                   <section>

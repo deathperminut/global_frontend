@@ -33,6 +33,7 @@
 .form-select{
     border-radius: 20px !important;
     background-color: aliceblue !important;
+    padding-left: 3.5rem !important;
 }
 .rounded{
     border-radius: 20px !important;
@@ -108,10 +109,15 @@ section{
 }
 .InputSelectContainer{
     margin-top: 1rem;
-    color:rgb(40, 51, 119);
+    color:rgb(40, 51, 119) !important;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content:center;
+
+}
+.Form {
+    margin-top: 6rem !important;
 }
 
 .ButtonSubmit{
@@ -152,6 +158,10 @@ section{
         display:flex;
         flex-direction: column;
         height: 120vh;
+    }
+    .Form {
+        position: relative;
+        bottom: 7rem !important;
     }
     .FormContainer{
         order: 2;
