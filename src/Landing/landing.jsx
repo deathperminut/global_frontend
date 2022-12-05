@@ -8,6 +8,12 @@ import Dropzone from 'react-dropzone';
 import Swal from 'sweetalert2';
 import ClipLoader from "react-spinners/ClipLoader";
 
+/* DOWLOADING   */
+import DownloadLink from "react-download-link";
+import RunFile from '../services/landing';
+import axios from 'axios';
+
+
 
 
 /* LOADING */
@@ -27,7 +33,10 @@ export default function Landing() {
 
   /* USE STATE */
   let [file,setFile]=React.useState(null);
-  let [selectValue,setSelectValue]=React.useState("Nuevos clientes");
+  let [selectValue,setSelectValue]=React.useState("Nuevos Clientes");
+
+  /* USE EFFECT*/
+
 
 
   const ChangeSelectValue=(event)=>{
@@ -57,9 +66,11 @@ export default function Landing() {
   }
 
 
-  const Run=async()=>{
+  const Run=()=>{
     setLoading(true);
-    await timeout(2000); //for 1 sec delay
+    RunFile(file[0],selectValue).then(data=>{
+      console.log("ANSWER: ",data)
+    }); 
     setLoading(false);
   }
 
@@ -99,8 +110,8 @@ export default function Landing() {
                 <div className='InputSelectContainer'>
                     <label className='Text'>Seleccione el tipo de cliente</label>
                     <Form.Select onChange={(event)=>ChangeSelectValue(event)} aria-label="Default select example" id="InputSelect" className='shadow'>
-                        <option value="Nuevos clientes">Nuevos clientes</option>
-                        <option value="Antiguos clientes">Antiguos clientes</option>
+                        <option value="Nuevos Clientes">Nuevos clientes</option>
+                        <option value="Antiguos Clientes">Antiguos clientes</option>
                     </Form.Select>
                     
                     {file===null ? 
@@ -108,6 +119,7 @@ export default function Landing() {
                     <span className='Text alert'>Selecciona un archivo para analizar...</span>
                     :
                     <button onClick={Run} type="button" className='ButtonSubmit shadow' disabled={file===null}>Analizar</button>}
+
                 </div>
                 
             </form>
