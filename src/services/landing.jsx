@@ -9,12 +9,10 @@ export default  async function RunFile(file,typefile){
 
     const path= environment.api + environment.docs;
 
-    let body={
-         "csv":'hola',
-         "modelo_a_ejecutar":"hola"
-    };
-    
-    
-    return await axios.post(path, body);
+    let body = new FormData();
+    body.append('csv', file);
+    body.append('modelo_a_ejecutar',typefile)
+
+    return await axios.post(path,body);
  
  }

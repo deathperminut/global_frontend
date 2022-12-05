@@ -13,6 +13,8 @@ import DownloadLink from "react-download-link";
 import RunFile from '../services/landing';
 import axios from 'axios';
 
+import $ from 'jquery';
+
 
 
 
@@ -34,6 +36,7 @@ export default function Landing() {
   /* USE STATE */
   let [file,setFile]=React.useState(null);
   let [selectValue,setSelectValue]=React.useState("Nuevos Clientes");
+  let [downloadFile,setdownloadFile]=React.useState(null)
 
   /* USE EFFECT*/
 
@@ -49,7 +52,7 @@ export default function Landing() {
         icon: 'success',
         title: 'Archivo cargado correctamente',
       })
-      console.log(event)
+     
       setFile(event);
     }else{
       /* ALERT */
@@ -67,11 +70,29 @@ export default function Landing() {
 
 
   const Run=()=>{
-    setLoading(true);
-    RunFile(file[0],selectValue).then(data=>{
-      console.log("ANSWER: ",data)
-    }); 
-    setLoading(false);
+    let A_element=$("a")[0];
+     setLoading(true);
+     RunFile(file[0],selectValue).then(data=>{
+        Swal.fire({
+         icon: 'success',
+         title: 'Analisis exitoso',
+       })
+
+       let A_element=$("a")[0];
+       setdownloadFile(data['data']);
+       A_element.click();
+       setdownloadFile(null)
+       setLoading(false);
+     }).catch(error=>
+     {
+       Swal.fire({
+         icon: 'error',
+         title: 'Archivo CSV invalido',
+       }) 
+       setFile(null)
+       setLoading(false);
+     }); 
+    
   }
 
 
@@ -108,17 +129,21 @@ export default function Landing() {
                 </Dropzone>
                 <div className='InputSelectContainer'>
                     <label className='Text'>Seleccione el tipo de cliente</label>
-                    <Form.Select onChange={(event)=>ChangeSelectValue(event)} aria-label="Default select example" id="InputSelect" className='shadow'>
+                    <Form.Select   onChange={(event)=>ChangeSelectValue(event)} aria-label="Default select example" id="InputSelect" className='shadow'>
                         <option value="Nuevos Clientes">Nuevos clientes</option>
                         <option value="Antiguos Clientes">Antiguos clientes</option>
                     </Form.Select>
                     
                     {file===null ? 
-                    
                     <span className='Text alert'>Selecciona un archivo para analizar...</span>
                     :
                     <button onClick={Run} type="button" className='ButtonSubmit shadow' disabled={file===null}>Analizar</button>}
-
+                    <DownloadLink
+                      style={{display:'none'}}
+                      label="download"
+                      filename={"Resultados_Analisis"}
+                      exportFile={() => downloadFile}
+                    />
                 </div>
                 
             </form>
