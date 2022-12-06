@@ -11,19 +11,14 @@ import ClipLoader from "react-spinners/ClipLoader";
 /* DOWLOADING   */
 import DownloadLink from "react-download-link";
 import RunFile from '../services/landing';
-import axios from 'axios';
 
-import $ from 'jquery';
+//import $ from 'jquery';
 
 
 
 
 /* LOADING */
 
-
-function timeout(delay) {
-  return new Promise( res => setTimeout(res, delay) );
-}
 
 
   
@@ -66,11 +61,15 @@ export default function Landing() {
 
   const ResetFile=()=>{
     setFile(null);
+    setdownloadFile(null);
+  }
+  const DowloadFile=()=>{
+    setdownloadFile(null);
   }
 
 
   const Run=()=>{
-    let A_element=$("a")[0];
+    ////let A_element=$("a")[0];
      setLoading(true);
      RunFile(file[0],selectValue).then(data=>{
         Swal.fire({
@@ -78,10 +77,10 @@ export default function Landing() {
          title: 'Analisis exitoso',
        })
 
-       let A_element=$("a")[0];
+      //  let A_element=$("a")[0];
+      //  console.log(data['data']);
+      //  A_element.setAttribute("href",data['data'])
        setdownloadFile(data['data']);
-       A_element.click();
-       setdownloadFile(null)
        setLoading(false);
      }).catch(error=>
      {
@@ -138,12 +137,15 @@ export default function Landing() {
                     <span className='Text alert'>Selecciona un archivo para analizar...</span>
                     :
                     <button onClick={Run} type="button" className='ButtonSubmit shadow' disabled={file===null}>Analizar</button>}
+                    {downloadFile!=null ? 
                     <DownloadLink
-                      style={{display:'none'}}
+                      className="Dowloadfile"
+                      onClick={DowloadFile}
                       label="download"
                       filename={"Resultados_Analisis"}
                       exportFile={() => downloadFile}
-                    />
+                    /> : <></>}
+                    
                 </div>
                 
             </form>

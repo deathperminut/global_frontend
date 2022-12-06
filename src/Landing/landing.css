@@ -23,6 +23,11 @@
 .SecondContainer{
     width: 50vw;
     height: 100vh;
+    border-radius: 1px solid rgb(40, 51, 119) !important;
+}
+.Dowloadfile{
+   color: rgba(13,76,112,1) !important;
+   /* text-decoration: n !important; */
 }
 .center{
     display: flex;

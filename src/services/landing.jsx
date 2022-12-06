@@ -1,4 +1,4 @@
-import React from "react";
+
 import axios from "axios";
 import { environment } from "../environment/environment";
 
@@ -16,3 +16,4 @@ export default  async function RunFile(file,typefile){
     return await axios.post(path,body);
  
  }
+
