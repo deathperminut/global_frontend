@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import './landing.css';
 import Logo from '../assets/Global.png'
 import { Form } from 'react-bootstrap';
@@ -24,6 +24,7 @@ import RunFile from '../services/landing';
   
 
 export default function Landing() {
+  let fileDownload = useRef();
 
   /*LOADING */
   let [loadingInProgress, setLoading] = React.useState(false);
@@ -42,6 +43,15 @@ export default function Landing() {
   }
 
   const fileInputChange=(event)=>{
+    if(file!=null){
+      setFile(event);
+      setdownloadFile(null);
+      Swal.fire({
+        icon: 'success',
+        title: 'Archivo cargado correctamente',
+      })
+
+    }else
     if(event[0].type.includes("csv")){
       Swal.fire({
         icon: 'success',
@@ -64,7 +74,7 @@ export default function Landing() {
     setdownloadFile(null);
   }
   const DowloadFile=()=>{
-    setdownloadFile(null);
+    console.log("entramos dowloadfile")
   }
 
 
@@ -75,21 +85,18 @@ export default function Landing() {
         Swal.fire({
          icon: 'success',
          title: 'Analisis exitoso',
-       })
-
-      //  let A_element=$("a")[0];
-      //  console.log(data['data']);
-      //  A_element.setAttribute("href",data['data'])
+       });
        setdownloadFile(data['data']);
        setLoading(false);
-     }).catch(error=>
-     {
-       Swal.fire({
-         icon: 'error',
-         title: 'Archivo CSV invalido',
-       }) 
-       setFile(null)
-       setLoading(false);
+     }).catch((error)=>{
+      Swal.fire({
+        icon: 'error',
+        title: 'Archivo CSV invalido',
+      });
+      setLoading(false);
+      ResetFile();
+      
+
      }); 
     
   }
@@ -137,14 +144,23 @@ export default function Landing() {
                     <span className='Text alert'>Selecciona un archivo para analizar...</span>
                     :
                     <button onClick={Run} type="button" className='ButtonSubmit shadow' disabled={file===null}>Analizar</button>}
-                    {downloadFile!=null ? 
-                    <DownloadLink
+                    {
+                      downloadFile!=null ?
+                     
+                      <DownloadLink
+                      ref={fileDownload}
                       className="Dowloadfile"
                       onClick={DowloadFile}
                       label="download"
                       filename={"Resultados_Analisis"}
                       exportFile={() => downloadFile}
-                    /> : <></>}
+                    />
+                      :
+                      <>
+
+                      </>
+                    }
+                    
                     
                 </div>
                 
