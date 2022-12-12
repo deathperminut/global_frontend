@@ -91,7 +91,7 @@ export default function Landing() {
      }).catch((error)=>{
       Swal.fire({
         icon: 'error',
-        title: 'Archivo CSV invalido',
+        title: 'Archivo CSV invalido'
       });
       setLoading(false);
       ResetFile();
